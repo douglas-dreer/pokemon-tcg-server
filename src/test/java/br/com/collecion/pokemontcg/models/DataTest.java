@@ -1,6 +1,7 @@
 package br.com.collecion.pokemontcg.models;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,12 +15,14 @@ public class DataTest implements Models{
     }
 
     @Override
+    @Test
     public void mustReturnSuccess_WhenCreateByConstructorWithParams() {
         Data data = new Data(card);
         check(data);
     }
 
     @Override
+    @Test
     public void mustReturnSuccess_WhenCreateBySetters() {
         Data data = new Data();
         data.setData(card);
@@ -27,6 +30,7 @@ public class DataTest implements Models{
     }
 
     @Override
+    @Test
     public void mustReturnSuccess_WhenCreateByBuilder() {
         Data data = Data.builder()
                 .data(card)
