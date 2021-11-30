@@ -2,15 +2,15 @@ package br.com.collecion.pokemontcg.models;
 
 import lombok.*;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Builder
-public class Normal {
-    private double low;
+public class ReverseHolofoil {
+    private int low;
     private double mid;
-    private double high;
+    private int high;
     private double market;
     private double directLow;
 }

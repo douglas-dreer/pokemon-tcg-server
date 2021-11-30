@@ -7,45 +7,45 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-public class NormalTest implements Models {
-    private static final double low = 1.0;
+class ReverseHolofoilTest implements Models {
+    private static final int low = 1;
     private static final double mid = 2.0;
-    private static final double high = 3.0;
+    private static final int high = 3;
     private static final double market = 10.0;
     private static final double directLow = 100.0;
 
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateByConstructorWithParams() {
-        Normal normal = new Normal(low, mid, high, market, directLow);
-        check(normal);
+        ReverseHolofoil reverseHolofoil = new ReverseHolofoil(low, mid, high, market, directLow);
+        check(reverseHolofoil);
     }
 
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateBySetters() {
-        Normal normal = new Normal();
-        normal.setLow(low);
-        normal.setMid(mid);
-        normal.setHigh(high);
-        normal.setMarket(market);
-        normal.setDirectLow(directLow);
+        ReverseHolofoil reverseHolofoil = new ReverseHolofoil();
+        reverseHolofoil.setLow(low);
+        reverseHolofoil.setMid(mid);
+        reverseHolofoil.setHigh(high);
+        reverseHolofoil.setMarket(market);
+        reverseHolofoil.setDirectLow(directLow);
 
-        check(normal);
+        check(reverseHolofoil);
     }
 
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateByBuilder() {
-        Normal normal = Normal.builder()
+        ReverseHolofoil reverseHolofoil = ReverseHolofoil.builder()
                 .low(low).mid(mid).high(high)
                 .market(market).directLow(directLow)
                 .build();
-        check(normal);
+        check(reverseHolofoil);
     }
 
-    private void check(Normal item){
-        assertNotNull(item, createMsg("Normal"));
+    private void check(ReverseHolofoil item){
+        assertNotNull(item, createMsg("ReverseHolofoil"));
         assertEquals(low, item.getLow(), createMsg("low"));
         assertEquals(mid, item.getMid(), createMsg("mid"));
         assertEquals(high, item.getHigh(), createMsg("high"));
