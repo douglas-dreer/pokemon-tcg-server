@@ -14,7 +14,7 @@ public enum MessagesEnum {
     SERVICE_UNAVAILABLE_ERROR("Serviço temporáriamente indisponível. Por favor tente mais tarde."),
     TOO_MANY_REQUESTS_ERROR("Foram realizadas muitas requisições em pouco tempo. Por favor aguarde um pouco e tente novamente."),
     UUID_INVALID("UUID %s inválido"),
-    ACESSO_NEGADO("Usuário, senha ou token inválido"),
+    ACCESS_DENIED("Usuário, senha ou token inválido"),
     TEST_ERROR("O campo '%s' está vazio, null ou é diferente da esperada.");
 
 

@@ -14,4 +14,5 @@ public enum ExceptionEnum {
 
     private final String text;
 
+
 }
