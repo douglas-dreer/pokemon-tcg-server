@@ -4,7 +4,6 @@ import br.com.collecion.pokemontcg.models.Card;
 import br.com.collecion.pokemontcg.models.Cards;
 import br.com.collecion.pokemontcg.models.Data;
 import br.com.collecion.pokemontcg.webservices.PokemonTradeCardGameWebService;
-import br.com.collecion.pokemontcg.webservices.PokemonTradeCardGameWebServiceTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -13,7 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
