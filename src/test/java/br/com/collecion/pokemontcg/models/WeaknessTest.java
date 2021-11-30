@@ -41,7 +41,7 @@ class WeaknessTest implements Models {
     }
     private void check(Weakness item){
         assertNotNull(item, createMsg("Weakness"));
-        assertEquals(type, item.getType(), createMsg("fire"));
-        assertEquals(value, item.getValue(), createMsg("1.0"));
+        assertEquals(type, item.getType(), createMsg(type));
+        assertEquals(value, item.getValue(), createMsg(value));
     }
 }

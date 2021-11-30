@@ -17,29 +17,29 @@ import java.util.List;
 @JsonRootName(value = "data")
 
 public class Card {
-    public String id;
-    public String name;
-    public String supertype;
-    public List<String> subtypes;
-    public String level;
-    public String hp;
-    public List<String> types;
-    public String evolvesFrom;
-    public List<Ability> abilities;
-    public List<Attack> attacks;
-    public List<Weakness> weaknesses;
-    public List<String> retreatCost;
-    public int convertedRetreatCost;
-    public Set set;
-    public String number;
-    public String artist;
-    public String rarity;
-    public String flavorText;
-    public List<Integer> nationalPokedexNumbers;
-    public Legalities legalities;
-    public Images images;
-    public Tcgplayer tcgplayer;
-    public List<String> evolvesTo;
-    public List<Resistance> resistances;
+    private String id;
+    private String name;
+    private String supertype;
+    private List<String> subtypes;
+    private String level;
+    private String hp;
+    private List<String> types;
+    private String evolvesFrom;
+    private List<Ability> abilities;
+    private List<Attack> attacks;
+    private List<Weakness> weaknesses;
+    private List<String> retreatCost;
+    private int convertedRetreatCost;
+    private Set set;
+    private String number;
+    private String artist;
+    private String rarity;
+    private String flavorText;
+    private List<Integer> nationalPokedexNumbers;
+    private Legalities legalities;
+    private Images images;
+    private Tcgplayer tcgplayer;
+    private List<String> evolvesTo;
+    private List<Resistance> resistances;
 }
 

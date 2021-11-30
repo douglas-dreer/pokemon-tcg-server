@@ -8,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class Resistance {
-    public String type;
-    public String value;
+    private String type;
+    private String value;
 }

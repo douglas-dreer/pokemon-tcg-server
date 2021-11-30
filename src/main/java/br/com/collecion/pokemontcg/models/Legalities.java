@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @Builder
 public class Legalities{
-    public String unlimited;
-    public String standard;
-    public String expanded;
+    private String unlimited;
+    private String standard;
+    private String expanded;
 }

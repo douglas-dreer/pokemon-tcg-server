@@ -5,34 +5,46 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest
 public class AbilityTest implements Models{
-    private Card card = new Card();
+    private static final String name = "name";
+    private static final String text = "text";
+    private static final String type = "type";
 
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateByConstructorWithParams() {
-        Data data = new Data(card);
-        check(data);
+        Ability ability = new Ability(name, text, type);
+        check(ability);
     }
 
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateBySetters() {
-        Data data = new Data();
-        data.setData(card);
-        check(data);
+        Ability ability = new Ability();
+        ability.setName(name);
+        ability.setText(text);
+        ability.setType(type);
+        check(ability);
     }
 
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateByBuilder() {
-        Data data = Data.builder().data(card).build();
-        check(data);
+        Ability ability = Ability.builder()
+                .name(name)
+                .type(type)
+                .text(text)
+        .build();
+        check(ability);
     }
 
-    private void check(Data item){
-        Assertions.assertNotNull(item, createMsg("Card"));
-        Assertions.assertEquals(card, item.getData(), createMsg("card"));
+    private void check(Ability item){
+        Assertions.assertNotNull(item, createMsg("Ability"));
+        assertEquals(name, item.getName(), createMsg("name"));
+        assertEquals(type, item.getType(), createMsg("type"));
+        assertEquals(text, item.getText(), createMsg("text"));
     }
 }
