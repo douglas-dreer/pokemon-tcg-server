@@ -31,7 +31,7 @@ public class PokemonTradeCardGameWebService {
         httpHeaders.set("X-Api-Key", API);
     }
 
-    public Object execute(String url, HttpMethod method, Type type) throws Exception{
+    private Object execute(String url, HttpMethod method, Type type) throws Exception{
         String result = "";
         try {
             params = new HttpEntity(httpHeaders);
