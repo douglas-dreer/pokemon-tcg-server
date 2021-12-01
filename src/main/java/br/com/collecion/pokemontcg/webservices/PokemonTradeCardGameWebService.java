@@ -44,7 +44,7 @@ public class PokemonTradeCardGameWebService {
             }
             result = response.getBody();
         } catch (Exception e) {
-            HandleException.tratamentoErro(e.getLocalizedMessage(), PokemonTradeCardGameWebService.class);
+            HandleException.errorHandling(e.getLocalizedMessage());
         }
         return new Gson().fromJson(result, type);
     }
