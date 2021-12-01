@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres-14.1
+    image: postgres:14.1
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - APP_DB_USER=ash
+      - APP_DB_PASS=m@st3rP0k3m0n
+      - APP_DB_NAME=pokemon-tcg-collection
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    ports:
+      - 5432:5432

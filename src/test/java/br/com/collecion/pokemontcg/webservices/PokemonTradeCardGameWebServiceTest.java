@@ -35,7 +35,7 @@ public class PokemonTradeCardGameWebServiceTest {
     @Mock
     private RestTemplate restTemplate;
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
     private String jsonResponse;
     private String jsonResponseList;
 
