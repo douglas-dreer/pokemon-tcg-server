@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 public class HandleException {
     public static Logger logger = LoggerFactory.getLogger(HandleException.class);
 
-    public static void tratamentoErro(String code, Type type) {
+    public static void errorHandling(String code) {
 
         switch (code) {
             case "400":
@@ -18,7 +18,7 @@ public class HandleException {
             case "403":
                 logger.error(ExceptionEnum.FORBIDDEN.getText());
                 break;
-            case "404":
+            case "404 NOT_FOUND":
                 logger.error(ExceptionEnum.NOT_FOUND.getText());
                 break;
             case "500":
