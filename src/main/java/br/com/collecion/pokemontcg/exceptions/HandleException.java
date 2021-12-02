@@ -4,8 +4,6 @@ import br.com.collecion.pokemontcg.enums.ExceptionEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Type;
-
 public class HandleException {
     public static Logger logger = LoggerFactory.getLogger(HandleException.class);
 
