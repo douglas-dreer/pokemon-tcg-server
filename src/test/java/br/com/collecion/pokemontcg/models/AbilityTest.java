@@ -1,6 +1,5 @@
 package br.com.collecion.pokemontcg.models;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class AbilityTest implements Models{
+public class AbilityTest implements Models {
     private static final String name = "name";
     private static final String text = "text";
     private static final String type = "type";
