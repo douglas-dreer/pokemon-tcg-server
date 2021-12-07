@@ -53,7 +53,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
-          mvn clean verify sonar:sonar
+          mvn -B clean verify
+          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
           -Dsonar.projectKey=pokemon-tcg
           -Dsonar.host.url=http://localhost:9000
           -Dsonar.login=dfcd9fde0209a839635140d152620b763b1b2eb4
