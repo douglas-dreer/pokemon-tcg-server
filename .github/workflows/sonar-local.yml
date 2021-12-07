@@ -52,4 +52,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pokemon-tcg
+        run: |
+          mvn clean verify sonar:sonar
+          -Dsonar.projectKey=pokemon-tcg
+          -Dsonar.host.url=http://localhost:9000
+          -Dsonar.login=dfcd9fde0209a839635140d152620b763b1b2eb4
+          -Dsonar.branch.name=develop
+        #mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pokemon-tcg
