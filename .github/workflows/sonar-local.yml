@@ -9,6 +9,16 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v2
         with:
@@ -17,6 +27,23 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+
+      # Performs a clean installation of all dependencies in the `package.json` file
+      # For more information, see https://docs.npmjs.com/cli/ci.html
+      - name: Install dependencies
+      run: npm ci
+
+      - name: Connect to PostgreSQL
+        # Runs a script that creates a PostgreSQL table, populates
+        # the table with data, and then retrieves the data.
+        run: node client.js
+        # Environment variables used by the `client.js` script to create a new PostgreSQL table.
+        env:
+          # O nome do host usado para comunicar-se com o contêiner de serviço do PostgreSQL
+          POSTGRES_HOST: postgres
+          # A porta-padrão do PostgreSQL
+          POSTGRES_PORT: 5432
+
       - name: Cache SonarQube packages
         uses: actions/cache@v1
         with:
