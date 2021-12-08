@@ -13,4 +13,5 @@ jobs:
         uses: ./.github/actions/postgresql@v1
         with:
           branch: master
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ inputs.username }}
+          token: ${{ secrets.envPAT }}
