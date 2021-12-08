@@ -5,6 +5,7 @@ on:
     branches: [ master, develop ]
 jobs:
   postgres_job:
+    runs-on: ubuntu-latest
     steps:
       - name: PosgreSQL
         uses: ./.github/actions/postgres
