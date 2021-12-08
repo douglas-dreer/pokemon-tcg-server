@@ -11,5 +11,5 @@ jobs:
       - name: Starting
         uses: pokemon-tcg-server/workflows/postgresql.yml
         with:
-          branch: develop
+          branch: master
           github_token: ${{ secrets.GITHUB_TOKEN }}
