@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Starting
         #{owner}/{repo}/{path}/{filename}@{ref}
-        uses: douglas-dreer/pokemon-tcg-server/master/.github/actions/postgresql.yml
+        uses: ./.github/actions/postgresql@v1
         with:
           branch: master
           github_token: ${{ secrets.GITHUB_TOKEN }}
