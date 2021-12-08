@@ -4,14 +4,7 @@ on:
   push:
     branches: [ master, develop ]
 jobs:
-  postgresql:
-    - name: postgresql
-        uses: actions/postgresql@v1
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-
-  sonarcloud:
-    - name: sonarcloud
-        uses: actions/sonarcloud@v1
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+  postgres_job:
+    steps:
+      - name: PosgreSQL
+        uses: ./.github/actions/postgres
