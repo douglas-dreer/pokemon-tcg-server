@@ -5,10 +5,11 @@ on:
     branches: [ master, develop ]
 jobs:
   postgres_job:
+    name: Postgresql
     runs-on: ubuntu-latest
     steps:
-      - name: PosgreSQL
-        uses: ./.github/actions/postgresql@master
+      - name: Starting
+        uses: actions/github-actions/postgresql@master
         with:
           branch: develop
           github_token: ${{ secrets.GITHUB_TOKEN }}
