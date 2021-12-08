@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Starting
-        uses: actions/postgres
+        uses: .github/actions/postgresql@master
         with:
           branch: develop
           github_token: ${{ secrets.GITHUB_TOKEN }}
