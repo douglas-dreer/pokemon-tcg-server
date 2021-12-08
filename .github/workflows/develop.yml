@@ -7,7 +7,7 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   build:
-    name: Build
+    name: SonarCloud Starting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -33,4 +33,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=douglas-dreer_docker-sonarqube -Dsonar.branch.name=develop -Dspring.profiles.active=test
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=douglas-dreer_pokemon-tcg-server -Dsonar.branch.name=develop -Dspring.profiles.active=test
