@@ -8,10 +8,7 @@ jobs:
     name: Postgresql
     runs-on: ubuntu-latest
     steps:
-      - name: Starting
-        #{owner}/{repo}/{path}/{filename}@{ref}
-        uses: pokemon-tcg-server/actions/postgresql@v1
+      - name: Setup Postgresql
+        uses: harmon758/postgresql-action@v1
         with:
-          branch: master
-          username: ${{ inputs.username }}
-          token: ${{ secrets.envPAT }}
+          postgreql version: '11'
