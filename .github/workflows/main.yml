@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Starting
-        uses: pokemon-tcg-server/github-actions/postgresql@master
+        uses: douglas-dreer/pokemon-tcg-server/postgresql@master
         with:
           branch: develop
           github_token: ${{ secrets.GITHUB_TOKEN }}
