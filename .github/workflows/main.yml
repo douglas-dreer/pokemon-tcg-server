@@ -1,4 +1,4 @@
-name: SonarCloud [Develop]
+name: SonarCloud [Master]
 on:
   push:
     branches:
