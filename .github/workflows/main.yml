@@ -5,8 +5,13 @@ on:
     branches: [ master, develop ]
 jobs:
   postgresql:
-    uses: douglas-dreer/pokemon-tcg-server/.github/workflows/postgresql.yml@1
+    - name: postgresql
+        uses: actions/postgresql@v1
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
 
   sonarcloud:
-   needs: postgresql
-   uses: douglas-dreer/pokemon-tcg-server/.github/workflows/sonarcloud.yml@1
+    - name: sonarcloud
+        uses: actions/sonarcloud@v1
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
