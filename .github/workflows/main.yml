@@ -1,68 +1,12 @@
-# This is a basic workflow to help you get started with Actions
+name: General
 
-name: SonarCloud
-
-# Controls when the workflow will run
 on:
-  workflow_call:
-    inputs:
-      username:
-        required: true
-        type: string
-    secrets:
-      envPAT:
-        required: true
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master, develop ]
-  pull_request:
-    branches: [ master, develop ]
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  reusable_workflow_job:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/postgresql@v1
-        with:
-          username: ${{ inputs.username }}
-          token: ${{ secrets.envPAT }}
+  postgresql:
+    uses: /douglas-dreer/pokemon-tcg-server/.github/workflows/postgresql.yml@1
 
-
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=douglas-dreer_pokemon-tcg-server
-
-      
+  sonarcloud:
+   needs: postgresql
+   uses: /douglas-dreer/pokemon-tcg-server/.github/workflows/sonarcloud.yml@1
