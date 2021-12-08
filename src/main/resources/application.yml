@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: Pokemon Trade Card Game Collections
+  jpa:
+    database: POSTGRESQL
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: 'jdbc:postgresql://localhost:5432/pokemon-tcg-collection'
+    username: postgres
+    password: admin
+  database:
+    driverClassName: org.postgresql.Driver
+server:
+  servlet:
+    context-path: /api/v1
+  port: '8080'

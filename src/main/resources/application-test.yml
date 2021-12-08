@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: Pokemon Trade Card Game Collections
+    profiles:
+      active: tests
+  jpa:
+    database: POSTGRESQL
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:h2:mem:pokemon-tcg-collections
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+    jpa:
+      spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+server:
+  servlet:
+    context-path: /api/v1
+  port: '8083'
