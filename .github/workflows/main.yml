@@ -17,7 +17,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   postgres:
-    uses: octo-org/example-repo/.github/workflows/postres.yml@v1
+    uses: .github/workflows/posgresql.yml@v1
 
   # This workflow contains a single job called "build"
   build:
