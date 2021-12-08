@@ -23,7 +23,7 @@ jobs:
   reusable_workflow_job:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/postgresql@v1
+      - uses: ./.github/actions/action@v1
         with:
           username: ${{ inputs.username }}
           token: ${{ secrets.envPAT }}
