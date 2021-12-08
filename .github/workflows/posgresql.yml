@@ -45,4 +45,4 @@ jobs:
       - name: Query database
         run: psql -h postgres -d pokemon-tcg-collection -U postgres -c 'SELECT 1;'
         env:          
-          PGPASSWORD: admin@123
+          PGPASSWORD: admin
