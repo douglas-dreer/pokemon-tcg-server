@@ -6,9 +6,55 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  build:
+  PostgreSQL:
+    name: PostgreSQL
+    runs-on: ubuntu-latest
+    container: node:latest
+
+      # service containers to run with `postgres-job`
+      services:
+        # label used to access the service container
+        postgres:
+          # Docker Hub image
+          image: postgres:latest
+          # service environment variables
+          # `POSTGRES_HOST` is `postgres`
+          env:
+            # optional (defaults to `postgres`)
+            POSTGRES_DB: pokemon-tcg-collections
+            # required
+            POSTGRES_PASSWORD: admin
+            # optional (defaults to `5432`)
+            POSTGRES_PORT: 5432
+            # optional (defaults to `postgres`)
+            POSTGRES_USER: postgres
+          ports:
+            # maps tcp port 5432 on service container to the host
+            - 5432:5432
+          # set health checks to wait until postgres has started
+          options: >-
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+
+      steps:
+        - name: Install PostgreSQL client
+          run: |
+            apt-get update
+            apt-get install --yes postgresql-client
+
+        # queries database with postgres client
+        - name: Query database
+          run: psql -h postgres -d pokemon-tcg-collections -U postgres -c 'SELECT 1;'
+          env:
+            PGPASSWORD: admin
+
+  sonarCloud:
     name: SonarCloud Starting
     runs-on: ubuntu-latest
+    if: ${{ always() }}
+     needs: PostgreSQL
     steps:
       - uses: actions/checkout@v2
         with:
