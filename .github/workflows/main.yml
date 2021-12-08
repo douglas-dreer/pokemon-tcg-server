@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Starting
         #{owner}/{repo}/{path}/{filename}@{ref}
-        uses: .github/actions/postgresql@v1
+        uses: pokemon-tcg-server/.github/actions/postgresql@v1
         with:
           branch: master
           username: ${{ inputs.username }}
