@@ -30,6 +30,8 @@ public class User {
     private String name;
     private String email;
     private String username;
+
+    @Column(length = 2086)
     private String password;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
