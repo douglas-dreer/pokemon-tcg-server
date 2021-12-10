@@ -1,7 +1,9 @@
 package br.com.collecion.pokemontcg.controllers;
 
+import br.com.collecion.pokemontcg.dtos.UserDTO;
 import br.com.collecion.pokemontcg.enities.User;
 import br.com.collecion.pokemontcg.services.UserService;
+import br.com.collecion.pokemontcg.utils.Converters;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -34,6 +36,7 @@ public class UserControllerTest {
 
     private static final UUID ID = UUID.fromString("37ca882d-8550-43b3-9a12-597d17885b64");
     private User user = new User();
+    private UserDTO dto = new UserDTO();
     private List<User> userList = new ArrayList<>();
 
     @BeforeEach
@@ -44,6 +47,7 @@ public class UserControllerTest {
                 new Date(), null, true
         );
         userList = Collections.singletonList(user);
+        dto = Converters.UserEntityToUserDTO(user);
     }
 
     @Test
@@ -51,7 +55,7 @@ public class UserControllerTest {
         when(service.findAll()).thenReturn(userList);
         ResponseEntity<List<User>> response = controller.findAll();
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(response.getStatusCode().is2xxSuccessful());
         assertNotNull(response.getBody());
         assertFalse(response.getBody().isEmpty());
 
@@ -63,7 +67,7 @@ public class UserControllerTest {
         when(service.findByUUID(any())).thenReturn(user);
         ResponseEntity<User> response = controller.findByUUID(ID);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(response.getStatusCode().is2xxSuccessful());
         assertNotNull(response.getBody());
         assertEquals(user, response.getBody());
 
@@ -73,25 +77,25 @@ public class UserControllerTest {
     @Test
     public void mustReturnSuccess_WhenSave() throws Exception {
         when(service.save(any())).thenReturn(user);
-        ResponseEntity<User> response = controller.save(user);
+        ResponseEntity<User> response = controller.save(dto);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(user, response.getBody());
 
-        verify(service, atLeastOnce()).save(user);
+        verify(service, atLeastOnce()).save(any());
     }
 
     @Test
     public void mustReturnSuccess_WhenEdit() {
-        when(service.edit(user)).thenReturn(user);
-        ResponseEntity<User> response = controller.edit(ID, user);
+        when(service.edit(any())).thenReturn(user);
+        ResponseEntity<User> response = controller.edit(ID, dto);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(response.getStatusCode().is2xxSuccessful());
         assertNotNull(response.getBody());
         assertEquals(user, response.getBody());
 
-        verify(service, atLeastOnce()).edit(user);
+        verify(service, atLeastOnce()).edit(any());
     }
 
     @Test
@@ -99,7 +103,7 @@ public class UserControllerTest {
         when(service.delete(ID)).thenReturn(true);
         ResponseEntity<Boolean> response = controller.delete(ID);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(response.getStatusCode().is2xxSuccessful());
         assertNotNull(response.getBody());
         assertEquals(true, response.getBody());
 

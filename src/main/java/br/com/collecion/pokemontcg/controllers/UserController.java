@@ -1,14 +1,15 @@
 package br.com.collecion.pokemontcg.controllers;
 
+import br.com.collecion.pokemontcg.dtos.UserDTO;
 import br.com.collecion.pokemontcg.enities.User;
 import br.com.collecion.pokemontcg.services.UserService;
+import br.com.collecion.pokemontcg.utils.Converters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,14 +33,14 @@ public class UserController {
 
     @PostMapping(produces = {"application/json;charset=UTF-8"}, consumes = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ResponseEntity<User> save(@RequestBody User user) throws Exception {
-        return new ResponseEntity<>(service.save(user), HttpStatus.CREATED);
+    public ResponseEntity<User> save(@RequestBody UserDTO user) throws Exception {
+        return new ResponseEntity<>(service.save(Converters.UserDTOoUserEntity(user)), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{uuid}", produces = {"application/json;charset=UTF-8"}, consumes = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ResponseEntity<User> edit(@PathVariable(name = "uuid") UUID uuid, @RequestBody User user) {
-        return ResponseEntity.ok(service.edit(user));
+    public ResponseEntity<User> edit(@PathVariable(name = "uuid") UUID uuid, @RequestBody UserDTO user) {
+        return ResponseEntity.ok(service.edit(Converters.UserDTOoUserEntity(user)));
     }
 
     @DeleteMapping(value = "/{uuid}", produces = {"application/json;charset=UTF-8"})
