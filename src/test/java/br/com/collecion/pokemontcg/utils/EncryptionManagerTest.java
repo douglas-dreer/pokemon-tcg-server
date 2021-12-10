@@ -3,6 +3,7 @@ package br.com.collecion.pokemontcg.utils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.lang.reflect.InvocationTargetException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -29,5 +30,10 @@ public class EncryptionManagerTest {
         boolean result = EncryptionManager.validate(password, hash);
 
         assertTrue(result);
+    }
+
+    @Test
+    public void privateConstructorTest() {
+        assertThrows(IllegalStateException.class, () -> EncryptionManager.applicationError());
     }
 }

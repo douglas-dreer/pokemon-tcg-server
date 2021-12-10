@@ -35,4 +35,8 @@ public class Converters {
                 .status(entity.getStatus())
                 .build();
     }
+
+    public static void applicationError(){
+        Converters error = new Converters();
+    }
 }
