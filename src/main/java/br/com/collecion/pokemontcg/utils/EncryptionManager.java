@@ -13,6 +13,7 @@ import java.util.Random;
 @NoArgsConstructor
 public class EncryptionManager {
     private static final int SALTS = 16;
+    private static final Random RANDOM = new Random();
 
     public static String encript(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         return generate(password);
@@ -39,8 +40,8 @@ public class EncryptionManager {
     private static String generate(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         char[] chars = password.toCharArray();
         byte[] salt = getSalt();
-        Random random = new Random();
-        int iterations = random.nextInt(1000) + 1000;
+
+        int iterations = RANDOM.nextInt(1000) + 1000;
 
         PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 1024 * 8);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
