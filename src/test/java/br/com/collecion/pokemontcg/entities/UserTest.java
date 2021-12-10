@@ -26,7 +26,6 @@ public class UserTest implements Models {
     @Test
     public void mustReturnSuccess_WhenCreateByConstructorWithParams() {
         User user = new User(id, name, email, username, password, createAt, updateAt, status);
-
         check(user);
     }
 
