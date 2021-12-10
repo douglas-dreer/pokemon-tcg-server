@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,7 +34,7 @@ public class UserController {
 
     @PostMapping(produces = {"application/json;charset=UTF-8"}, consumes = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ResponseEntity<User> save(@RequestBody UserDTO user) throws Exception {
+    public ResponseEntity<User> save(@RequestBody UserDTO user) throws NoSuchAlgorithmException, InvalidKeySpecException {
         return new ResponseEntity<>(service.save(Converters.userDTOoUserEntity(user)), HttpStatus.CREATED);
     }
 
