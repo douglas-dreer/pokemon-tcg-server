@@ -31,7 +31,7 @@ public class UserService {
         return result.isEmpty() ? null : result.get();
     }
 
-    public User save(User user) throws Exception {
+    public User save(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
         user.setStatus(true);
         user.setPassword(criptoPassword(user.getPassword()));
         user.setCreateAt(new Date());

@@ -1,7 +1,5 @@
 package br.com.collecion.pokemontcg.utils;
 
-import lombok.NoArgsConstructor;
-
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.math.BigInteger;
@@ -9,10 +7,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
-@NoArgsConstructor
 public class EncryptionManager {
     private static final int SALTS = 16;
 
+    public EncryptionManager() {
+    }
 
     public static String encript(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         return generate(password);

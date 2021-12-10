@@ -2,10 +2,13 @@ package br.com.collecion.pokemontcg.utils;
 
 import br.com.collecion.pokemontcg.dtos.UserDTO;
 import br.com.collecion.pokemontcg.enities.User;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+
 public class Converters {
+
+    public Converters() {
+    }
+
     public static User userDTOoUserEntity(UserDTO dto){
         return User.builder()
                 .id(dto.getId())
