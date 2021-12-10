@@ -47,6 +47,7 @@ public class EncryptionManager {
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 
         byte[] hash = skf.generateSecret(spec).getEncoded();
+
         return String.format("%s:%s:%s", iterations, toHex(salt), toHex(hash));
     }
 
@@ -59,11 +60,11 @@ public class EncryptionManager {
 
     private static String toHex(byte[] array) {
         BigInteger bi = new BigInteger(1, array);
-        String hex = bi.toString(SALTS);
-        String patten = "%s%sd%s";
-        int paddingLength = (array.length * 2) - hex.length();
+        String hex = bi.toString(16);
+        String patten = "%0%sd";
 
-        return paddingLength > 0 ? String.format(patten, "%0", paddingLength, hex) : hex;
+        int paddingLength = (array.length * 2) - hex.length();
+        return paddingLength > 0 ? String.format(patten, 0) : hex;
     }
 
     private static byte[] fromHex(String hex) {
