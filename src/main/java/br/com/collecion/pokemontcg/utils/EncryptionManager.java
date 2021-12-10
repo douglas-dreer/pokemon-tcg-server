@@ -1,5 +1,7 @@
 package br.com.collecion.pokemontcg.utils;
 
+import lombok.NoArgsConstructor;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.math.BigInteger;
@@ -7,8 +9,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
+@NoArgsConstructor
 public class EncryptionManager {
-    private static final int salts = 16;
+    private static final int SALTS = 16;
 
     public static String encript(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         return generate(password);
@@ -46,23 +49,24 @@ public class EncryptionManager {
 
     private static byte[] getSalt() throws NoSuchAlgorithmException {
         SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-        byte[] salt = new byte[salts];
+        byte[] salt = new byte[SALTS];
         sr.nextBytes(salt);
         return salt;
     }
 
     private static String toHex(byte[] array) {
         BigInteger bi = new BigInteger(1, array);
-        String hex = bi.toString(salts);
-
+        String hex = bi.toString(SALTS);
+        String patten = "%s%sd%s";
         int paddingLength = (array.length * 2) - hex.length();
-        return paddingLength > 0 ? String.format("%0" + paddingLength + "d", 0) + hex : hex;
+
+        return paddingLength > 0 ? String.format(patten, "%0", paddingLength, hex) : hex;
     }
 
     private static byte[] fromHex(String hex) {
         byte[] bytes = new byte[hex.length() / 2];
         for (int i = 0; i < bytes.length; i++) {
-            bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), salts);
+            bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), SALTS);
         }
         return bytes;
     }

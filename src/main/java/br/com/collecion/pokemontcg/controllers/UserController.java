@@ -33,13 +33,13 @@ public class UserController {
     @PostMapping(produces = {"application/json;charset=UTF-8"}, consumes = {"application/json;charset=UTF-8"})
     @ResponseBody
     public ResponseEntity<User> save(@RequestBody UserDTO user) throws Exception {
-        return new ResponseEntity<>(service.save(Converters.UserDTOoUserEntity(user)), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.save(Converters.userDTOoUserEntity(user)), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{uuid}", produces = {"application/json;charset=UTF-8"}, consumes = {"application/json;charset=UTF-8"})
     @ResponseBody
     public ResponseEntity<User> edit(@PathVariable(name = "uuid") UUID uuid, @RequestBody UserDTO user) {
-        return ResponseEntity.ok(service.edit(Converters.UserDTOoUserEntity(user)));
+        return ResponseEntity.ok(service.edit(Converters.userDTOoUserEntity(user)));
     }
 
     @DeleteMapping(value = "/{uuid}", produces = {"application/json;charset=UTF-8"})

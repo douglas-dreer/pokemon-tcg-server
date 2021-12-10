@@ -47,7 +47,7 @@ public class UserControllerTest {
                 new Date(), null, true
         );
         userList = Collections.singletonList(user);
-        dto = Converters.UserEntityToUserDTO(user);
+        dto = Converters.userEntityToUserDTO(user);
     }
 
     @Test

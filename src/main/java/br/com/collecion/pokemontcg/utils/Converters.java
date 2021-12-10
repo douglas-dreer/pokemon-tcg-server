@@ -2,9 +2,11 @@ package br.com.collecion.pokemontcg.utils;
 
 import br.com.collecion.pokemontcg.dtos.UserDTO;
 import br.com.collecion.pokemontcg.enities.User;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class Converters {
-    public static User UserDTOoUserEntity(UserDTO dto){
+    public static User userDTOoUserEntity(UserDTO dto){
         return User.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -17,7 +19,7 @@ public class Converters {
                 .build();
     }
 
-    public static UserDTO UserEntityToUserDTO(User entity){
+    public static UserDTO userEntityToUserDTO(User entity){
         return UserDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
