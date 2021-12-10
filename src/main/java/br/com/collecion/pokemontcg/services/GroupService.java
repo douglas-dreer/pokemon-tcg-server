@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Service
 public class GroupService {
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private static final Logger logger = LoggerFactory.getLogger(GroupService.class);
 
     @Autowired
     private GroupRepository repository;
