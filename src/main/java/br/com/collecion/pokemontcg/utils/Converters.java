@@ -6,7 +6,8 @@ import br.com.collecion.pokemontcg.enities.User;
 
 public class Converters {
 
-    public Converters() {
+    private Converters() {
+        throw new IllegalStateException("Converters Class");
     }
 
     public static User userDTOoUserEntity(UserDTO dto){

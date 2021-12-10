@@ -10,7 +10,8 @@ import java.security.spec.InvalidKeySpecException;
 public class EncryptionManager {
     private static final int SALTS = 16;
 
-    public EncryptionManager() {
+    private EncryptionManager() {
+        throw new IllegalStateException("EncryptionManager Class");
     }
 
     public static String encript(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
