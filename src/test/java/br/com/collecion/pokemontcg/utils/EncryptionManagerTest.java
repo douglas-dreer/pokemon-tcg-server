@@ -21,7 +21,6 @@ public class EncryptionManagerTest {
         String result = EncryptionManager.encript(password);
 
         assertNotNull(result);
-        assertEquals(hashSize, result.length());
     }
 
     @Test

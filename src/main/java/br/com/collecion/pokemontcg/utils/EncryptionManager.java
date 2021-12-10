@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Random;
 
 @NoArgsConstructor
 public class EncryptionManager {
@@ -38,7 +39,8 @@ public class EncryptionManager {
     private static String generate(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         char[] chars = password.toCharArray();
         byte[] salt = getSalt();
-        int iterations = 1000;
+        Random random = new Random();
+        int iterations = random.nextInt(1000) + 1000;
 
         PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 1024 * 8);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
