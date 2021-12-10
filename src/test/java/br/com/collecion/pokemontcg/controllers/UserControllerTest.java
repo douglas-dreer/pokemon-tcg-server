@@ -6,10 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.*;
 
@@ -26,6 +28,9 @@ public class UserControllerTest {
 
     @Mock
     private UserService service;
+
+    @Autowired
+    private MockMvc mockMvc;
 
     private static final UUID ID = UUID.fromString("37ca882d-8550-43b3-9a12-597d17885b64");
     private User user = new User();
@@ -66,7 +71,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void mustReturnSuccess_WhenSave() {
+    public void mustReturnSuccess_WhenSave() throws Exception {
         when(service.save(any())).thenReturn(user);
         ResponseEntity<User> response = controller.save(user);
 
