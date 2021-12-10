@@ -6,11 +6,8 @@ import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Random;
 
 public class EncryptionManager {
-    private static final Random random = new Random();
-
     private static final int salts = 16;
 
     public static String encript(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
