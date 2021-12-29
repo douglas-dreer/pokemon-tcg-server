@@ -1,6 +1,7 @@
 package br.com.collecion.pokemontcg.services;
 
 import br.com.collecion.pokemontcg.enities.Group;
+import br.com.collecion.pokemontcg.enities.User;
 import br.com.collecion.pokemontcg.enums.MessagesEnum;
 import br.com.collecion.pokemontcg.repositories.GroupRepository;
 import org.slf4j.Logger;
