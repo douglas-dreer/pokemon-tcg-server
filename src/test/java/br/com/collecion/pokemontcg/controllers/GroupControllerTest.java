@@ -95,7 +95,6 @@ public class GroupControllerTest {
         when(service.save(any())).thenReturn(group);
         ResponseEntity<?> response = controller.save(dto);
         String location = String.format("/api/v1/config/groups/%s", group.getId());
-        String result = response.getHeaders().getLocation().toString();
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(location, response.getHeaders().getLocation().toString());

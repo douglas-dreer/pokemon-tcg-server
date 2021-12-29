@@ -48,7 +48,7 @@ public class GroupController {
         group = Converters.groupEntityToGroupDTO(enity);
 
         URI location = URI.create(String.format("/api/v1/config/groups/%s", group.getId()));
-        return enity.equals(null) ? ResponseEntity.created(location).build() : ResponseEntity.internalServerError().body(MessagesEnum.INTERNAL_ERROR);
+        return enity != null ? ResponseEntity.created(location).build() : ResponseEntity.internalServerError().body(MessagesEnum.INTERNAL_ERROR);
     }
 
     @PutMapping(value = "/{uuid}", produces = {"application/json;charset=UTF-8"}, consumes = {"application/json;charset=UTF-8"})
