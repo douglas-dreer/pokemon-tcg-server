@@ -10,7 +10,6 @@ class PokemonTcgApplicationTests {
 
 	@Test
 	void contextLoads() {
-		PokemonTcgApplication.main(new String[] {});
 		assertTrue(true);
 	}
 

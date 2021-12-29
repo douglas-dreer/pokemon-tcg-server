@@ -1,5 +1,7 @@
-package br.com.collecion.pokemontcg.dtos;
+package br.com.collecion.pokemontcg.entities;
 
+import br.com.collecion.pokemontcg.enities.Group;
+import br.com.collecion.pokemontcg.enities.GroupUser;
 import br.com.collecion.pokemontcg.enities.User;
 import br.com.collecion.pokemontcg.models.Models;
 import org.junit.jupiter.api.Test;
@@ -12,33 +14,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-public class UserDTOTest implements Models {
+public class GroupUserTest implements Models {
      private static final UUID id = UUID.randomUUID();
-    private static final String name = "Tabitha Rowe";
-    private static final String email = "Simeon65@hotmail.com";
-    private static final String username = "Richard.Swaniawski53";
-    private static final String password = "Emmanuel_Kilback@hotmail.com";
-    private static final Date createAt = new Date();
-    private static final Date updateAt = new Date();
-    private static final boolean status = true;
-
+     private static final User user = new User();
+     private static final Group group = new Group();
+     private static final Date createAt = new Date();
+     private static final Date updateAt = new Date();
+     private static final boolean status = true;
 
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateByConstructorWithParams() {
-        UserDTO dto = new UserDTO(id, name, email, username, password, createAt, updateAt, status);
+        GroupUser dto = new GroupUser(id, group, user, createAt, updateAt, status);
         check(dto);
     }
 
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateBySetters() {
-        UserDTO dto = new UserDTO();
+        GroupUser dto = new GroupUser();
         dto.setId(id);
-        dto.setName(name);
-        dto.setEmail(email);
-        dto.setUsername(username);
-        dto.setPassword(password);
+        dto.setGroup(group);
+        dto.setUser(user);
         dto.setCreateAt(createAt);
         dto.setUpdateAt(updateAt);
         dto.setStatus(status);
@@ -49,22 +46,19 @@ public class UserDTOTest implements Models {
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateByBuilder() {
-        UserDTO dto = UserDTO.builder()
-                .id(id).name(name).email(email)
-                .username(username).password(password)
+        GroupUser dto = GroupUser.builder()
+                .id(id).group(group).user(user)
                 .createAt(createAt).updateAt(updateAt)
                 .status(status).build();
 
         check(dto);
     }
 
-    private void check(UserDTO item){
-        assertNotNull(item, createMsg("User"));
+    private void check(GroupUser item){
+        assertNotNull(item, createMsg("GroupUser"));
         assertEquals(id, item.getId(), createMsg("id"));
-        assertEquals(name, item.getName(), createMsg("name"));
-        assertEquals(email, item.getEmail(), createMsg("email"));
-        assertEquals(username, item.getUsername(), createMsg("username"));
-        assertEquals(password, item.getPassword(), createMsg("password"));
+        assertEquals(group, item.getGroup(), createMsg("group"));
+        assertEquals(user, item.getUser(), createMsg("user"));
         assertEquals(createAt, item.getCreateAt(), createMsg("createAt"));
         assertEquals(updateAt, item.getUpdateAt(), createMsg("updateAt"));
         assertEquals(status, item.getStatus(), createMsg("status"));

@@ -8,7 +8,8 @@ import lombok.Getter;
 public enum MessagesEnum {
     SUCCESS("Operação realizada com sucesso"),
     NOT_FOUND("Não foi possível encontrar nenhum registro a partir dos parametros enviados"),
-    INTERNAL_ERROR("Não foi possível realizar a operação."),
+    ERROR("Não foi possível realizar a operação com os parametros { '%s': '%s', '%s': '%s' }"),
+    INTERNAL_ERROR("Não foi possível realizar a operação. Caso persista o erro, por favor entre em contato com o administrador."),
     BAD_REQUEST_ERROR("Nós não conseguimos processar esta ação"),
     FORBIDDEN_ERROR("O acesso não foi permitido"),
     SERVICE_UNAVAILABLE_ERROR("Serviço temporáriamente indisponível. Por favor tente mais tarde."),
