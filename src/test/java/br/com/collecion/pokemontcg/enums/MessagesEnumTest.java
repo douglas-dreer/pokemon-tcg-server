@@ -9,7 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MessagesEnumTest {
     private static final String success = "Operação realizada com sucesso";
     private static final String notFound = "Não foi possível encontrar nenhum registro a partir dos parametros enviados";
-    private static final String internalError = "Não foi possível realizar a operação.";
+    private static final String internalError = "Não foi possível realizar a operação. Caso persista o erro, por favor entre em contato com o administrador.";
+    private static final String error = "Não foi possível realizar a operação com os parametros { '%s': '%s', '%s': '%s' }";
     private static final String badRequestError = "Nós não conseguimos processar esta ação";
     private static final String forbiddenError = "O acesso não foi permitido";
     private static final String serviceUnavailableError = "Serviço temporáriamente indisponível. Por favor tente mais tarde.";
@@ -23,6 +24,7 @@ public class MessagesEnumTest {
         assertEquals(success, MessagesEnum.SUCCESS.getText());
         assertEquals(notFound, MessagesEnum.NOT_FOUND.getText());
         assertEquals(internalError, MessagesEnum.INTERNAL_ERROR.getText());
+        assertEquals(error, MessagesEnum.ERROR.getText());
         assertEquals(badRequestError, MessagesEnum.BAD_REQUEST_ERROR.getText());
         assertEquals(forbiddenError, MessagesEnum.FORBIDDEN_ERROR.getText());
         assertEquals(serviceUnavailableError, MessagesEnum.SERVICE_UNAVAILABLE_ERROR.getText());
