@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class Converters {
     private static final Logger logger = LoggerFactory.getLogger(Converters.class);
 
-    public static User userDTOoUserEntity(UserDTO dto){
+    public static User userDTOoUserEntity(UserDTO dto) {
         return User.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -30,7 +30,7 @@ public class Converters {
                 .build();
     }
 
-    public static UserDTO userEntityToUserDTO(User entity){
+    public static UserDTO userEntityToUserDTO(User entity) {
         return UserDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -43,7 +43,7 @@ public class Converters {
                 .build();
     }
 
-    public static Group groupDTOoGroupEntity(GroupDTO dto){
+    public static Group groupDTOoGroupEntity(GroupDTO dto) {
         return Group.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -53,7 +53,7 @@ public class Converters {
                 .build();
     }
 
-    public static GroupDTO groupEntityToGroupDTO(Group entity){
+    public static GroupDTO groupEntityToGroupDTO(Group entity) {
         return GroupDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
