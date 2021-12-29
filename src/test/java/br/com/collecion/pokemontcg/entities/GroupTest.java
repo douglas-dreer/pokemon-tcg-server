@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-public class GroupDTOTest implements Models {
+public class GroupTest implements Models {
      private static final UUID id = UUID.randomUUID();
-     private static final String name = "Administrator";   
+     private static final String name = "Admin";
      private static final Date createAt = new Date();
      private static final Date updateAt = new Date();
      private static final boolean status = true;
@@ -22,32 +22,32 @@ public class GroupDTOTest implements Models {
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateByConstructorWithParams() {
-        Group group = new Group(id, name, createAt, updateAt, status);
-        check(group);
+        Group dto = new Group(id, name, createAt, updateAt, status);
+        check(dto);
     }
 
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateBySetters() {
-        Group group = new Group();
-        group.setId(id);
-        group.setName(name);
-        group.setCreateAt(createAt);
-        group.setUpdateAt(updateAt);
-        group.setStatus(status);
+        Group dto = new Group();
+        dto.setId(id);
+        dto.setName(name);
+        dto.setCreateAt(createAt);
+        dto.setUpdateAt(updateAt);
+        dto.setStatus(status);
 
-        check(group);
+        check(dto);
     }
 
     @Override
     @Test
     public void mustReturnSuccess_WhenCreateByBuilder() {
-        Group group = Group.builder()
-                .id(id).name(name).createAt(createAt)
-                .updateAt(updateAt).status(status)
-                .build();
+        Group dto = Group.builder()
+                .id(id).name(name)
+                .createAt(createAt).updateAt(updateAt)
+                .status(status).build();
 
-        check(group);
+        check(dto);
     }
 
     private void check(Group item){

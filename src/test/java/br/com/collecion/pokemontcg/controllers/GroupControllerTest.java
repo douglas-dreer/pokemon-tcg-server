@@ -1,6 +1,7 @@
 package br.com.collecion.pokemontcg.controllers;
 
 import br.com.collecion.pokemontcg.dtos.GroupDTO;
+import br.com.collecion.pokemontcg.dtos.GroupUserDTO;
 import br.com.collecion.pokemontcg.enities.Group;
 import br.com.collecion.pokemontcg.enities.GroupUser;
 import br.com.collecion.pokemontcg.enities.User;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.net.URISyntaxException;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,6 +51,8 @@ public class GroupControllerTest {
     private final User user = new User();
     private final GroupUser groupUser = new GroupUser();
 
+    private final GroupUserDTO groupUserList = new GroupUserDTO();
+
     @BeforeEach
     public void setup() {
         group = new Group(ID, "Administrator", new Date(), null, true);
@@ -58,6 +62,8 @@ public class GroupControllerTest {
         user.setId(UUID.randomUUID());
         groupUser.setUser(user);
         groupUser.setGroup(group);
+
+        groupUserList.setUserList(Collections.singletonList(ID));
     }
 
     @Test
@@ -85,14 +91,14 @@ public class GroupControllerTest {
     }
 
     @Test
-    public void mustReturnSuccess_WhenSave() {
+    public void mustReturnSuccess_WhenSave() throws URISyntaxException {
         when(service.save(any())).thenReturn(group);
-        ResponseEntity<Group> response = controller.save(dto);
+        ResponseEntity<?> response = controller.save(dto);
+        String location = String.format("/api/v1/config/groups/%s", group.getId());
+        String result = response.getHeaders().getLocation().toString();
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(group, response.getBody());
-
+        assertEquals(location, response.getHeaders().getLocation().toString());
         verify(service, atLeastOnce()).save(any());
     }
 
@@ -124,10 +130,14 @@ public class GroupControllerTest {
     public void mustReturnSuccess_WhenAddUserToGroup() {
         when(groupUserService.save(any(), any())).thenReturn(true);
 
-        ResponseEntity<String> response = controller.addUserToGroup(group.getId(), user.getId());
+        ResponseEntity<?> response = controller.addUserToGroup(group.getId(), user.getId());
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(MessagesEnum.SUCCESS.getText(), response.getBody());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        String location = String.format("/api/v1/config/groups/%s/user", user.getId());
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(location, response.getHeaders().getLocation().toString());
+        verify(groupUserService, atLeastOnce()).save(any(), any());
     }
 
     @Test
@@ -135,7 +145,7 @@ public class GroupControllerTest {
         when(groupUserService.save(any(), any())).thenReturn(false);
         String msgError = String.format(MessagesEnum.ERROR.getText(), "groupId", group.getId(), "userId", user.getId());
 
-        ResponseEntity<String> response = controller.addUserToGroup(group.getId(), user.getId());
+        ResponseEntity<?> response = controller.addUserToGroup(group.getId(), user.getId());
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertEquals(msgError, response.getBody());
@@ -149,6 +159,7 @@ public class GroupControllerTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(MessagesEnum.SUCCESS.getText(), response.getBody());
+        verify(groupUserService, atLeastOnce()).removeUserFromGroup(any(), any());
     }
 
     @Test
@@ -160,6 +171,18 @@ public class GroupControllerTest {
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertEquals(msgError, response.getBody());
+        verify(groupUserService, atLeastOnce()).removeUserFromGroup(any(), any());
+    }
+
+    @Test
+    public void mustReturnSuccess_WhenFindUsersByGroupId() {
+        when(groupUserService.findByGroup(any())).thenReturn(groupUserList);
+
+        ResponseEntity<?> response = controller.findUsersByGroupId(user.getId());
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(groupUserList, response.getBody());
+        verify(groupUserService, atLeastOnce()).findByGroup(any());
     }
 
 }
