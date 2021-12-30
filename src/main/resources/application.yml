@@ -1,4 +1,7 @@
 spring:
+  devtools:
+    livereload:
+      enable: 'true'
   application:
     name: Pokemon Trade Card Game Collections
   jpa:

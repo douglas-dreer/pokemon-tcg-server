@@ -12,6 +12,7 @@ public enum MessagesEnum {
     INTERNAL_ERROR("Não foi possível realizar a operação. Caso persista o erro, por favor entre em contato com o administrador."),
     BAD_REQUEST_ERROR("Nós não conseguimos processar esta ação"),
     FORBIDDEN_ERROR("O acesso não foi permitido"),
+    FAIL_AUTHENTICATE("Falha ao autenticar usuário"),
     SERVICE_UNAVAILABLE_ERROR("Serviço temporáriamente indisponível. Por favor tente mais tarde."),
     TOO_MANY_REQUESTS_ERROR("Foram realizadas muitas requisições em pouco tempo. Por favor aguarde um pouco e tente novamente."),
     UUID_INVALID("UUID %s inválido"),

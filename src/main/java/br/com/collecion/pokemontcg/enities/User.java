@@ -1,8 +1,10 @@
 package br.com.collecion.pokemontcg.enities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
@@ -32,9 +34,11 @@ public class User {
     private String username;
 
     @Column(length = 2086)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createAt;
 

@@ -3,13 +3,11 @@ package br.com.collecion.pokemontcg.controllers;
 import br.com.collecion.pokemontcg.dtos.GroupDTO;
 import br.com.collecion.pokemontcg.dtos.GroupUserDTO;
 import br.com.collecion.pokemontcg.enities.Group;
-import br.com.collecion.pokemontcg.enities.GroupUser;
 import br.com.collecion.pokemontcg.enums.MessagesEnum;
 import br.com.collecion.pokemontcg.services.GroupService;
 import br.com.collecion.pokemontcg.services.GroupUserService;
 import br.com.collecion.pokemontcg.utils.Converters;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
