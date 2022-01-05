@@ -40,7 +40,7 @@ public class GroupController {
     @PostMapping(produces = {"application/json;charset=UTF-8"}, consumes = {"application/json;charset=UTF-8"})
     @ResponseBody
     public ResponseEntity<?> save(@RequestBody GroupDTO group) throws URISyntaxException {
-        Group enity = Converters.groupDTOoGroupEntity(group);
+        Group enity = Converters.groupDTOGroupEntity(group);
 
         enity = service.save(enity);
         group = Converters.groupEntityToGroupDTO(enity);
@@ -52,7 +52,7 @@ public class GroupController {
     @PutMapping(value = "/{uuid}", produces = {"application/json;charset=UTF-8"}, consumes = {"application/json;charset=UTF-8"})
     @ResponseBody
     public ResponseEntity<Group> edit(@PathVariable(name = "uuid") UUID uuid, @RequestBody GroupDTO group) {
-        return ResponseEntity.ok(service.edit(Converters.groupDTOoGroupEntity(group)));
+        return ResponseEntity.ok(service.edit(Converters.groupDTOGroupEntity(group)));
     }
 
     @DeleteMapping(value = "/{uuid}", produces = {"application/json;charset=UTF-8"})
