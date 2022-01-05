@@ -34,8 +34,8 @@ class UserServiceTest {
     private static final UUID ID = UUID.fromString("37ca882d-8550-43b3-9a12-597d17885b64");
     private User user = new User();
     private List<User> userList = new ArrayList<>();
-    private Group group = new Group();
-    private GroupUser groupUser = new GroupUser();
+    private static final Group group = new Group();
+    private static final GroupUser groupUser = new GroupUser();
 
     @BeforeEach
     public void setup() {

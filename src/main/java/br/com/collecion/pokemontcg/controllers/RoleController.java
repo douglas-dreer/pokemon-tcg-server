@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("config/roles")
+@RequestMapping("admin/config/roles")
 public class RoleController {
     @Autowired
     private RoleService service;

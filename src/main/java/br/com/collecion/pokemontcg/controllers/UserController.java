@@ -7,6 +7,7 @@ import br.com.collecion.pokemontcg.utils.Converters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
@@ -27,6 +28,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{uuid}", produces = {"application/json;charset=utf-8"})
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public ResponseEntity<User> findByUUID(@PathVariable(name = "uuid") UUID uuid) {
         return ResponseEntity.ok(service.findByUUID(uuid));
@@ -39,6 +41,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{uuid}", produces = {"application/json;charset=UTF-8"}, consumes = {"application/json;charset=UTF-8"})
+    @PreAuthorize("#uuid == authentication.id)")
     @ResponseBody
     public ResponseEntity<User> edit(@PathVariable(name = "uuid") UUID uuid, @RequestBody UserDTO user) {
         return ResponseEntity.ok(service.edit(Converters.userDTOoUserEntity(user)));

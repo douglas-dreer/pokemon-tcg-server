@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("config/groups")
+@RequestMapping("admin/config/groups")
 public class GroupController {
     @Autowired
     private GroupService service;
