@@ -11,7 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class EncryptionManagerTest {
+    private EncryptionManager encryptionManager;
+
     private static final String password = "This is a completely secure password. It complies with all 10 safety requirements.";
+    private static final int hashSize = 2086;
 
     @Test
     public void mustReturnSuccess_WhenEncript() throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -26,10 +29,5 @@ public class EncryptionManagerTest {
         boolean result = EncryptionManager.validate(password, hash);
 
         assertTrue(result);
-    }
-
-    @Test
-    public void privateConstructorTest() {
-        assertThrows(IllegalStateException.class, EncryptionManager::applicationError);
     }
 }

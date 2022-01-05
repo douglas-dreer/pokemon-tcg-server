@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -33,15 +32,13 @@ public class UserService {
 
     public User save(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
         user.setStatus(true);
-        user.setPassword(criptoPassword(user.getPassword()));
-        user.setCreateAt(new Date());
-        logger.debug("User created successfully. {}", user);
+        user.setPassword(EncryptionManager.encript(user.getPassword()));
         return repository.save(user);
     }
 
     public User edit(User user) {
         User userEdited = null;
-        user.setUpdateAt(new Date());
+
         if (repository.existsById(user.getId())) {
             userEdited = repository.save(user);
         } else {
@@ -53,9 +50,5 @@ public class UserService {
     public Boolean delete(UUID id) {
         repository.deleteById(id);
         return !repository.existsById(id);
-    }
-
-    private String criptoPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        return EncryptionManager.encript(password);
     }
 }

@@ -13,12 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.net.URISyntaxException;
 import java.util.*;
@@ -28,7 +26,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 public class GroupControllerTest {
 
     @InjectMocks
@@ -39,9 +36,6 @@ public class GroupControllerTest {
 
     @Mock
     private GroupUserService groupUserService;
-
-    @Autowired
-    private MockMvc mockMvc;
 
     private static final UUID ID = UUID.fromString("37ca882d-8550-43b3-9a12-597d17885b64");
     private Group group = new Group();
@@ -63,7 +57,7 @@ public class GroupControllerTest {
         groupUser.setUser(user);
         groupUser.setGroup(group);
 
-        groupUserList.setUserList(Collections.singletonList(ID));
+        groupUserList.setUserList(Collections.singletonList(user));
     }
 
     @Test

@@ -93,11 +93,24 @@ class GroupUserServiceTest {
 
     @Test
     public void mustReturnSuccess_WhenRemoveUserFromGroup() {
-        when(repository.deleteByGroupAndUser(any(), any())).thenReturn(1);
+        doNothing().when(repository).delete(any());
+        when(repository.findByUserAndGroup(any(), any())).thenReturn(groupUser);
 
         boolean result = service.removeUserFromGroup(groupUser.getGroup().getId(), groupUser.getUser().getId());
 
         assertTrue(result);
-        verify(repository, atLeastOnce()).deleteByGroupAndUser(any(), any());
+        verify(repository, atLeastOnce()).findByUserAndGroup(any(), any());
+        verify(repository, atLeastOnce()).delete(any());
+    }
+
+    @Test
+    public void mustReturnError_WhenRemoveUserFromGroup() {
+        doNothing().when(repository).delete(any());
+        when(repository.findByUserAndGroup(any(), any())).thenReturn(null);
+
+        boolean result = service.removeUserFromGroup(groupUser.getGroup().getId(), groupUser.getUser().getId());
+
+        assertFalse(result);
+        verify(repository, atLeastOnce()).findByUserAndGroup(any(), any());
     }
 }

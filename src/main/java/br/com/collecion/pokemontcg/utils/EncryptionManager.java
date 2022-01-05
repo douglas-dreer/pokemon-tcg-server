@@ -70,8 +70,4 @@ public class EncryptionManager {
         }
         return bytes;
     }
-
-    public static void applicationError(){
-        EncryptionManager error = new EncryptionManager();
-    }
 }

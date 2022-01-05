@@ -1,7 +1,10 @@
 package br.com.collecion.pokemontcg.enities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -14,10 +17,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 
-
 @Entity
-@Table(name = "groups_users")
-public class GroupUser {
+@Table(name = "roles_groups")
+public class RoleGroup {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -32,8 +34,8 @@ public class GroupUser {
     private Group group;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -57,5 +59,4 @@ public class GroupUser {
     private void preUpdate() {
         this.updateAt = new Date();
     }
-
 }
