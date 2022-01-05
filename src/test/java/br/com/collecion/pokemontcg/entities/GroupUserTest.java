@@ -54,6 +54,18 @@ public class GroupUserTest implements Models {
         check(dto);
     }
 
+    @Test
+    public void mustReturnSuccess_WhenPrePersistAndPreUpdate() {
+        GroupUser dto = new GroupUser();
+        dto.setId(id);
+        dto.setGroup(group);
+        dto.setUser(user);
+        dto.prePersist();
+        dto.preUpdate();
+
+        checkPrePersistAndPreUpdate(dto);
+    }
+
     private void check(GroupUser item){
         assertNotNull(item, createMsg("GroupUser"));
         assertEquals(id, item.getId(), createMsg("id"));
@@ -63,4 +75,16 @@ public class GroupUserTest implements Models {
         assertEquals(updateAt, item.getUpdateAt(), createMsg("updateAt"));
         assertEquals(status, item.getStatus(), createMsg("status"));
     }
+
+    private void checkPrePersistAndPreUpdate(GroupUser item){
+        assertNotNull(item, createMsg("GroupUser"));
+        assertEquals(id, item.getId(), createMsg("id"));
+        assertEquals(group, item.getGroup(), createMsg("group"));
+        assertEquals(user, item.getUser(), createMsg("user"));
+        assertNotNull(item.getCreateAt(), createMsg("prePersist"));
+        assertNotNull(item.getUpdateAt(), createMsg("preUpdate"));
+        assertEquals(status, item.getStatus(), createMsg("status"));
+    }
+
+
 }

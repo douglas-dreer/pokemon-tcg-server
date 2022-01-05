@@ -48,12 +48,33 @@ public class RoleTest implements Models {
         check(dto);
     }
 
+    @Test
+    public void mustReturnSuccess_WhenPrePersistAndPreUpdate() {
+        Role dto = new Role();
+        dto.setId(id);
+        dto.setName(name);
+        dto.prePersist();
+        dto.preUpdate();
+        dto.setStatus(status);
+
+        checkPrePersistAndPreUpdate(dto);
+    }
+
     private void check(Role item){
         assertNotNull(item, createMsg("Role"));
         assertEquals(id, item.getId(), createMsg("id"));
         assertEquals(name, item.getName(), createMsg("name"));
         assertEquals(createAt, item.getCreateAt(), createMsg("createAt"));
         assertEquals(updateAt, item.getUpdateAt(), createMsg("updateAt"));
+        assertEquals(status, item.getStatus(), createMsg("status"));
+    }
+
+    private void checkPrePersistAndPreUpdate(Role item){
+        assertNotNull(item, createMsg("Role"));
+        assertEquals(id, item.getId(), createMsg("id"));
+        assertEquals(name, item.getName(), createMsg("name"));
+        assertNotNull(item.getCreateAt(), createMsg("PrePersit"));
+        assertNotNull(item.getUpdateAt(), createMsg("preUpdate"));
         assertEquals(status, item.getStatus(), createMsg("status"));
     }
 }

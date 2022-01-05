@@ -1,10 +1,7 @@
 package br.com.collecion.pokemontcg.enities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -12,9 +9,10 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Builder
 
 @Entity
@@ -49,14 +47,15 @@ public class RoleGroup {
     @Column(name = "status")
     private Boolean status = true;
 
+
     @PrePersist
-    private void prePersist() {
+    public void prePersist() {
         this.createAt = new Date();
         this.status = true;
     }
 
     @PreUpdate
-    private void preUpdate() {
+    public void preUpdate() {
         this.updateAt = new Date();
     }
 }

@@ -41,14 +41,15 @@ public class Role {
     @Column(name = "status")
     private Boolean status = true;
 
+
     @PrePersist
-    private void prePersist() {
+    public void prePersist() {
         this.createAt = new Date();
         this.status = true;
     }
 
     @PreUpdate
-    private void preUpdate() {
+    public void preUpdate() {
         this.updateAt = new Date();
     }
 }

@@ -8,8 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Date;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class GroupTest implements Models {
@@ -50,12 +49,32 @@ public class GroupTest implements Models {
         check(dto);
     }
 
+    @Test
+    public void mustReturnSuccess_WhenPrePersistAndPreUpdate() {
+        Group dto = new Group();
+        dto.setId(id);
+        dto.setName(name);
+        dto.setStatus(status);
+        dto.prePersist();
+        dto.preUpdate();
+        checkPrePersistAndPreUpdate(dto);
+    }
+
     private void check(Group item){
         assertNotNull(item, createMsg("Group"));
         assertEquals(id, item.getId(), createMsg("id"));
         assertEquals(name, item.getName(), createMsg("name"));
         assertEquals(createAt, item.getCreateAt(), createMsg("createAt"));
         assertEquals(updateAt, item.getUpdateAt(), createMsg("updateAt"));
+        assertEquals(status, item.getStatus(), createMsg("status"));
+    }
+
+    private void checkPrePersistAndPreUpdate(Group item){
+        assertNotNull(item, createMsg("Group"));
+        assertEquals(id, item.getId(), createMsg("id"));
+        assertEquals(name, item.getName(), createMsg("name"));
+        assertNotNull(item.getCreateAt(), createMsg("prePersist"));
+        assertNotNull(item.getUpdateAt(), createMsg("preUpdate"));
         assertEquals(status, item.getStatus(), createMsg("status"));
     }
 }

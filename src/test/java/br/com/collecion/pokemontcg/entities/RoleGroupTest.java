@@ -50,6 +50,18 @@ public class RoleGroupTest implements Models {
         check(dto);
     }
 
+    @Test
+    public void mustReturnSuccess_WhenPrePersistAndPreUpdate() {
+        RoleGroup dto = new RoleGroup();
+        dto.setId(id);
+        dto.setGroup(group);
+        dto.setRole(role);
+        dto.prePersist();
+        dto.preUpdate();
+
+        checkPrePersistAndPreUpdate(dto);
+    }
+
     private void check(RoleGroup item){
         assertNotNull(item, createMsg("RoleGroup"));
         assertEquals(id, item.getId(), createMsg("id"));
@@ -57,6 +69,16 @@ public class RoleGroupTest implements Models {
         assertEquals(role, item.getRole(), createMsg("role"));
         assertEquals(createAt, item.getCreateAt(), createMsg("createAt"));
         assertEquals(updateAt, item.getUpdateAt(), createMsg("updateAt"));
+        assertEquals(status, item.getStatus(), createMsg("status"));
+    }
+
+    private void checkPrePersistAndPreUpdate(RoleGroup item){
+        assertNotNull(item, createMsg("RoleGroup"));
+        assertEquals(id, item.getId(), createMsg("id"));
+        assertEquals(group, item.getGroup(), createMsg("group"));
+        assertEquals(role, item.getRole(), createMsg("role"));
+        assertNotNull(item.getCreateAt(), createMsg("prePersiste"));
+        assertNotNull(item.getUpdateAt(), createMsg("preUpdate"));
         assertEquals(status, item.getStatus(), createMsg("status"));
     }
 }

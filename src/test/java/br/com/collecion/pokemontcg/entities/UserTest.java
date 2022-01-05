@@ -57,6 +57,19 @@ public class UserTest implements Models {
         check(user);
     }
 
+    @Test
+    public void mustReturnSuccess_WhenPrePersistAndPreUpdate() {
+        User user = new User();
+        user.setId(id);
+        user.setName(name);
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.prePersist();
+        user.preUpdate();
+        checkPrePersistAndPreUpdate(user);
+    }
+
     private void check(User item){
         assertNotNull(item, createMsg("User"));
         assertEquals(id, item.getId(), createMsg("id"));
@@ -66,6 +79,18 @@ public class UserTest implements Models {
         assertEquals(password, item.getPassword(), createMsg("password"));
         assertEquals(createAt, item.getCreateAt(), createMsg("createAt"));
         assertEquals(updateAt, item.getUpdateAt(), createMsg("updateAt"));
+        assertEquals(status, item.getStatus(), createMsg("status"));
+    }
+
+    private void checkPrePersistAndPreUpdate(User item){
+        assertNotNull(item, createMsg("User"));
+        assertEquals(id, item.getId(), createMsg("id"));
+        assertEquals(name, item.getName(), createMsg("name"));
+        assertEquals(email, item.getEmail(), createMsg("email"));
+        assertEquals(username, item.getUsername(), createMsg("username"));
+        assertEquals(password, item.getPassword(), createMsg("password"));
+        assertNotNull(item.getCreateAt(), createMsg("prePersist"));
+        assertNotNull(item.getUpdateAt(), createMsg("preUpdate"));
         assertEquals(status, item.getStatus(), createMsg("status"));
     }
 }
