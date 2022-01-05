@@ -1,16 +1,14 @@
 package br.com.collecion.pokemontcg.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 public class RoleDTO {
     private UUID id;

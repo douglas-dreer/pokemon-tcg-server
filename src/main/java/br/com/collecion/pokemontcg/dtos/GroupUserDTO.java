@@ -2,16 +2,14 @@ package br.com.collecion.pokemontcg.dtos;
 
 import br.com.collecion.pokemontcg.enities.Group;
 import br.com.collecion.pokemontcg.enities.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 public class GroupUserDTO {
     private Group group;
