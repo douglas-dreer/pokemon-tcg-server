@@ -10,9 +10,10 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Builder
 
 @Table(name = "roles")

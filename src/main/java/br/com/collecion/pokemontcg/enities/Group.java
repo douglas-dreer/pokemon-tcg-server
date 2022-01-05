@@ -9,9 +9,11 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Builder
 
 @Entity

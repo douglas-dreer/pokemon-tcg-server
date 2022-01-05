@@ -14,9 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -44,20 +41,20 @@ public class RoleGroupService {
     }
 
     public boolean save(UUID roleId, UUID groupId) {
-       boolean status = false;
-       RoleGroup roleGroup = new RoleGroup();
-       Role role = checkExistRole(roleId);
-       Group group = checkExistGroup(groupId);
+        boolean status = false;
+        RoleGroup roleGroup = new RoleGroup();
+        Role role = checkExistRole(roleId);
+        Group group = checkExistGroup(groupId);
 
-       if (role != null && group != null) {
-          roleGroup.setGroup(group);
-          roleGroup.setRole(role);
-          repository.save(roleGroup);
-          status = true;
-       } else {
-        logger.error(MessagesEnum.NOT_FOUND.getText());
-        logger.info("{'roleId': {}, 'groupId': {}", roleId, groupId);
-    }
+        if (role != null && group != null) {
+            roleGroup.setGroup(group);
+            roleGroup.setRole(role);
+            repository.save(roleGroup);
+            status = true;
+        } else {
+            logger.error(MessagesEnum.NOT_FOUND.getText());
+            logger.info("{'roleId': {}, 'groupId': {}", roleId, groupId);
+        }
         return status;
     }
 

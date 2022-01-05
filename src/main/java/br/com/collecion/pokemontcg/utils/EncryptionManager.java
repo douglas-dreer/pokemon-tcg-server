@@ -26,7 +26,7 @@ public class EncryptionManager {
         byte[] testHash = skf.generateSecret(spec).getEncoded();
 
         int diff = hash.length ^ testHash.length;
-        for( int i = 0; i < hash.length && i < testHash.length; i++) {
+        for (int i = 0; i < hash.length && i < testHash.length; i++) {
             diff |= hash[i] ^ testHash[i];
         }
         return diff == 0;
@@ -66,7 +66,7 @@ public class EncryptionManager {
     private static byte[] fromHex(String hex) {
         byte[] bytes = new byte[hex.length() / 2];
         for (int i = 0; i < bytes.length; i++) {
-            bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), SALTS);
+            bytes[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), SALTS);
         }
         return bytes;
     }

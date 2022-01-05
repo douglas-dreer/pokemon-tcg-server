@@ -52,7 +52,7 @@ public class RoleController {
             role = Converters.roleEntitytoRoleDTO(roleOptional.get());
             URI location = URI.create(String.format("/api/v1/config/roles/%s", role.getId()));
             return ResponseEntity.created(location).build();
-        } else  {
+        } else {
             return ResponseEntity.internalServerError().body(MessagesEnum.INTERNAL_ERROR.getText());
         }
     }

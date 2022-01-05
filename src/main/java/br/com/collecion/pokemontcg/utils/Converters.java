@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -82,7 +81,7 @@ public class Converters {
     public static GroupRoleDTO roleGroupListToGroupRole(List<RoleGroup> roleGroupList) {
         GroupRoleDTO result = new GroupRoleDTO();
 
-        if(roleGroupList.isEmpty()) {
+        if (roleGroupList.isEmpty()) {
             return new GroupRoleDTO();
         }
 
