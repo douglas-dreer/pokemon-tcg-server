@@ -9,15 +9,14 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 
-
-@Entity
-@Table(name = "groups_users")
-public class GroupUser {
+@Table(name = "roles")
+public class Role {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -27,13 +26,7 @@ public class GroupUser {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "group_id", referencedColumnName = "id")
-    private Group group;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    private String name;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -57,5 +50,4 @@ public class GroupUser {
     private void preUpdate() {
         this.updateAt = new Date();
     }
-
 }

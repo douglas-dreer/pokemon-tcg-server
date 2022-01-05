@@ -3,6 +3,7 @@ package br.com.collecion.pokemontcg.services;
 import br.com.collecion.pokemontcg.dtos.GroupUserDTO;
 import br.com.collecion.pokemontcg.enities.Group;
 import br.com.collecion.pokemontcg.enities.GroupUser;
+import br.com.collecion.pokemontcg.enities.RoleGroup;
 import br.com.collecion.pokemontcg.enities.User;
 import br.com.collecion.pokemontcg.enums.MessagesEnum;
 import br.com.collecion.pokemontcg.repositories.GroupUserRepository;
@@ -12,15 +13,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class GroupUserService {
     private static final Logger logger = LoggerFactory.getLogger(GroupUserService.class);
     @Autowired
-    private GroupUserRepository groupUserRepository;
+    private GroupUserRepository repository;
 
     @Autowired
     private GroupService groupService;
@@ -37,9 +38,8 @@ public class GroupUserService {
         if (user != null && group != null) {
             groupUser.setGroup(group);
             groupUser.setUser(user);
-            groupUser.setCreateAt(new Date());
 
-            groupUserRepository.save(groupUser);
+            repository.save(groupUser);
             status = true;
         } else {
             logger.error(MessagesEnum.NOT_FOUND.getText());
@@ -57,11 +57,18 @@ public class GroupUserService {
     }
 
     public boolean removeUserFromGroup(UUID groupId, UUID userId) {
-        return groupUserRepository.deleteByGroupAndUser(groupId, userId) >= 1;
+        boolean status = false;
+        GroupUser groupUser = repository.findByUserAndGroup(userId, groupId);
+
+        if (groupUser != null) {
+            repository.delete(groupUser);
+            status = true;
+        }
+        return status;
     }
 
     public GroupUserDTO findByGroup(UUID groupId) {
-        List<GroupUser> results = groupUserRepository.findUsersByGroupId(groupId);
-        return Converters.groupUserToList(results);
+        List<GroupUser> results = repository.findUsersByGroupId(groupId);
+        return Converters.groupUserListToGroupUser(results);
     }
 }

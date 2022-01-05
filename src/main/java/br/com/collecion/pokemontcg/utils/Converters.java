@@ -1,11 +1,7 @@
 package br.com.collecion.pokemontcg.utils;
 
-import br.com.collecion.pokemontcg.dtos.GroupDTO;
-import br.com.collecion.pokemontcg.dtos.GroupUserDTO;
-import br.com.collecion.pokemontcg.dtos.UserDTO;
-import br.com.collecion.pokemontcg.enities.Group;
-import br.com.collecion.pokemontcg.enities.GroupUser;
-import br.com.collecion.pokemontcg.enities.User;
+import br.com.collecion.pokemontcg.dtos.*;
+import br.com.collecion.pokemontcg.enities.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +39,7 @@ public class Converters {
                 .build();
     }
 
-    public static Group groupDTOoGroupEntity(GroupDTO dto) {
+    public static Group groupDTOGroupEntity(GroupDTO dto) {
         return Group.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -63,13 +59,46 @@ public class Converters {
                 .build();
     }
 
-    public static GroupUserDTO groupUserToList(List<GroupUser> groupUserList) {
+    public static Role roleDTOtoRoleEntity(RoleDTO dto) {
+        return Role.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .createAt(dto.getCreateAt())
+                .updateAt(dto.getUpdateAt())
+                .status(dto.getStatus())
+                .build();
+    }
+
+    public static RoleDTO roleEntitytoRoleDTO(Role entity) {
+        return RoleDTO.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .createAt(entity.getCreateAt())
+                .updateAt(entity.getUpdateAt())
+                .status(entity.getStatus())
+                .build();
+    }
+
+    public static GroupRoleDTO roleGroupListToGroupRole(List<RoleGroup> roleGroupList) {
+        GroupRoleDTO result = new GroupRoleDTO();
+
+        if(roleGroupList.isEmpty()) {
+            return new GroupRoleDTO();
+        }
+
+        result.setRole(roleGroupList.get(0).getRole());
+        List<Group> groupList = roleGroupList.stream().map(item -> item.getGroup()).collect(Collectors.toList());
+        result.setGroupList(groupList);
+
+        return result;
+    }
+
+    public static GroupUserDTO groupUserListToGroupUser(List<GroupUser> groupUserList) {
         GroupUserDTO result = new GroupUserDTO();
 
-        result.setGroup(groupUserList.get(0).getId());
-        List<UUID> userList = groupUserList.stream().map(item -> item.getUser().getId()).collect(Collectors.toList());
+        result.setGroup(groupUserList.get(0).getGroup());
+        List<User> userList = groupUserList.stream().map(item -> item.getUser()).collect(Collectors.toList());
         result.setUserList(userList);
-
         return result;
     }
 }
