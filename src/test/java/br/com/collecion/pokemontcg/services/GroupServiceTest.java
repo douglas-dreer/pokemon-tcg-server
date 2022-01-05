@@ -54,6 +54,16 @@ class GroupServiceTest {
     }
 
     @Test
+    void mustReturnSuccess_WhenFindByName() {
+        Optional<Group> optionalGroup = Optional.of(group);
+        when(repository.findByName(anyString())).thenReturn(optionalGroup);
+        Group result = service.findByName("Admin");
+
+        assertNotNull(result);
+        verify(repository, atLeastOnce()).findByName(anyString());
+    }
+
+    @Test
     public void mustReturnSuccess_WhenSave() {
         when(repository.save(any())).thenReturn(group);
 

@@ -1,6 +1,10 @@
 package br.com.collecion.pokemontcg.services;
 
+import br.com.collecion.pokemontcg.enities.Group;
+import br.com.collecion.pokemontcg.enities.GroupUser;
 import br.com.collecion.pokemontcg.enities.User;
+import br.com.collecion.pokemontcg.repositories.GroupRepository;
+import br.com.collecion.pokemontcg.repositories.GroupUserRepository;
 import br.com.collecion.pokemontcg.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,9 +25,17 @@ class UserServiceTest {
     @Mock
     private UserRepository repository;
 
+    @Mock
+    private GroupRepository groupRepository;
+
+    @Mock
+    private GroupUserRepository groupUserRepository;
+
     private static final UUID ID = UUID.fromString("37ca882d-8550-43b3-9a12-597d17885b64");
     private User user = new User();
     private List<User> userList = new ArrayList<>();
+    private Group group = new Group();
+    private GroupUser groupUser = new GroupUser();
 
     @BeforeEach
     public void setup() {
@@ -34,6 +46,9 @@ class UserServiceTest {
                 new Date(), null, true
         );
         userList = Collections.singletonList(user);
+        group.setId(UUID.randomUUID());
+        groupUser.setGroup(group);
+        groupUser.setUser(user);
     }
 
     @Test
@@ -60,12 +75,17 @@ class UserServiceTest {
 
     @Test
     public void mustReturnSuccess_WhenSave() throws Exception {
+        Optional<Group> groupOptional = Optional.of(group);
         when(repository.save(any())).thenReturn(user);
+        when(groupRepository.findByName(anyString())).thenReturn(groupOptional);
+        when(groupUserRepository.save(any())).thenReturn(groupUser);
 
         User result = service.save(user);
 
         assertNotNull(result);
         verify(repository, atLeastOnce()).save(any());
+        verify(groupRepository, atLeastOnce()).findByName(anyString());
+        verify(groupUserRepository, atLeastOnce()).save(any());
     }
 
     @Test

@@ -85,6 +85,18 @@ public class GroupControllerTest {
     }
 
     @Test
+    public void mustReturnSuccess_WhenFindByName() {
+        when(service.findByName(any())).thenReturn(group);
+        ResponseEntity<Group> response = controller.findByName("Administrator");
+
+        assertTrue(response.getStatusCode().is2xxSuccessful());
+        assertNotNull(response.getBody());
+        assertEquals(group, response.getBody());
+
+        verify(service, atLeastOnce()).findByName(any());
+    }
+
+    @Test
     public void mustReturnSuccess_WhenSave() throws URISyntaxException {
         when(service.save(any())).thenReturn(group);
         ResponseEntity<?> response = controller.save(dto);

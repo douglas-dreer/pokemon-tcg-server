@@ -29,6 +29,12 @@ public class GroupService {
         return result.isEmpty() ? null : result.get();
     }
 
+    public Group findByName(String name) {
+        Optional<Group> result = repository.findByName(name);
+        return  result.isPresent() ? result.get() : null;
+    }
+
+
     public Group save(Group group) {
         group.setStatus(true);
         group.setCreateAt(new Date());
